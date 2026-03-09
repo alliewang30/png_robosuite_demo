@@ -6,7 +6,6 @@ import numpy as np
 import robosuite as suite
 import logging
 
-# Silence the Flask/Werkzeug logger
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
