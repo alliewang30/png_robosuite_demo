@@ -1,4 +1,4 @@
-# Point and Go: Mode Switching for Robotic Teleoperation
+# Point and Go Mode Switching Robosuite Kinova Demo
 
 This repository contains the `robosuite` implementation of the **Point and Go** mode switching framework. This demo features a Kinova Gen3 robot in a "Lift" task environment, controlled via a custom Web-based joystick GUI. 
 
