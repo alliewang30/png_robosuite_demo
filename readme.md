@@ -33,14 +33,14 @@ mkdir third_party
 cd third_party
 
 # Clone and install robosuite (v1.5.2)
-git clone [https://github.com/ARISE-Initiative/robosuite.git](https://github.com/ARISE-Initiative/robosuite.git)
+git clone https://github.com/ARISE-Initiative/robosuite.git
 cd robosuite
 git checkout tags/v1.5.2
 pip install -e .
 cd ..
 
 # Clone and install robosuite_models (v1.0.0)
-git clone [https://github.com/ARISE-Initiative/robosuite_models.git](https://github.com/ARISE-Initiative/robosuite_models.git)
+git clone https://github.com/ARISE-Initiative/robosuite_models.git
 cd robosuite_models
 git checkout tags/v1.0.0
 pip install -e .
