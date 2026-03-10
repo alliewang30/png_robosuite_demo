@@ -137,7 +137,6 @@ def main():
 
         env.sim.forward()
         env.render()
-        robot.validate_kinematics()
 
         if i % PRINT_EVERY == 0:
             print_joint_state(env, robot, label=f"loop {i}", print_on_cmd=PRINT_ONLY_ON_CMD)

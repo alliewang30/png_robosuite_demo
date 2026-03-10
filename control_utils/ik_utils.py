@@ -53,7 +53,7 @@ class png_control(KinovaGen3):
         if mode == 0:
             twist = self.threshold(vec[5]*0.5, 0.1) #thresholding third joystick dof, twist is vec[2] but currently mapped to vec[5] (thumb button)
         else:
-            twist = self.threshold(vec[4], 0.1)
+            twist = self.threshold(vec[5]*2, 0.1)
         control_vec = np.array([[1, vec[1], -vec[0], twist]]) # defining control vec, can change indicies of vec to use different dofs of joystick
         self.state_to_qdot(mode) # updating qdots
         if mode == 1:
@@ -97,7 +97,7 @@ class png_control(KinovaGen3):
         ee_origin_base = T_base_ee @ origin_pt
         ray_full_base = ref_z_base - ee_origin_base
         delta_z = (T_base_ee @ (ref_x_ee.T @ rot_z(self.j6_angle)).T)[2] - ee_origin_base[2]
-        # self.j6_control(-delta_z)
+        self.j6_control(-delta_z)
         return ray_full_base
 
     def parse_bases(self, fb, lr, tw):
