@@ -14,7 +14,7 @@ This repository contains the `robosuite` implementation of the **Point and Go** 
 
 ---
 
-## 🛠 Installation
+## Installation
 
 Follow these steps to set up the environment and local dependencies.
 
@@ -66,7 +66,7 @@ Open `third_party/robosuite/robosuite/controllers/parts/controller.py` and comme
 
 ---
 
-## 🚀 Running the Demo
+## Running the Demo
 
 Launch the main controller script:
 
