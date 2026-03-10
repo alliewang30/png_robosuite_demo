@@ -38,9 +38,9 @@ class png_control(KinovaGen3):
         self.lengths = np.array([156.4, 128.4, 210.4, 210.4, 208.4, 105.9, 105.9, 61.5, 140]) # lengths of robot joints, could replace with dh-params
         self.last_j6_error = 0 # for pid controller to keep ee flat
         self.j6_angle = 0 # to rotate inputs into more intuitive reference frame
-        self.rotation_gain = 0.2 # gains for rotations
-        self.translation_gain = 0.2 # gains for translations
-        self.wrist_motion_gain = 0.2 # gains for wrist flexion
+        self.rotation_gain = 1 # gains for rotations
+        self.translation_gain = 1 # gains for translations
+        self.wrist_motion_gain = 1 # gains for wrist flexion
 
     def step(self, ax, mode):
         # runs each loop according to rospy.rate
@@ -51,10 +51,10 @@ class png_control(KinovaGen3):
     def remap_axes(self, vec, mode):
         # multiplies joystick commands, vec, with qdots
         if mode == 0:
-            twist = self.threshold(vec[5], 0.1) #thresholding third joystick dof, twist is vec[2] but currently mapped to vec[5] (thumb button)
+            twist = self.threshold(vec[5]*0.5, 0.1) #thresholding third joystick dof, twist is vec[2] but currently mapped to vec[5] (thumb button)
         else:
             twist = self.threshold(vec[4], 0.1)
-        control_vec = np.array([[1, vec[1], vec[0], twist]]) # defining control vec, can change indicies of vec to use different dofs of joystick
+        control_vec = np.array([[1, vec[1], -vec[0], twist]]) # defining control vec, can change indicies of vec to use different dofs of joystick
         self.state_to_qdot(mode) # updating qdots
         if mode == 1:
              self.j6_theta_change(-twist) # this is to change the parameter of the pid controller operating the last joint
@@ -273,7 +273,7 @@ class cartesian_control(KinovaGen3):
     def remap_axes(self, vec, mode):
         if self.DOF == 3:
             if mode == 0:	
-                cmd = [vec[1], vec[0], -0.05*vec[1] + vec[2], 0, 0, 0]
+                cmd = [vec[1], vec[0], vec[2], 0, 0, 0]
             elif mode == 1:
                 cmd = [0, 0, 0, vec[1], -1.0 * vec[0], -1.0 * vec[2]]
                 

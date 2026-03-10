@@ -50,7 +50,7 @@ JOINT_NAME_TO_ID = {
 
 class KinovaGen3(object):
     """
-    robosuite / MuJoCo shim with the same public surface that your PNG code expects.
+    robosuite / MuJoCo shim with the same public surface that the PNG code expects.
 
     This is intentionally a thin compatibility layer, not a faithful Kortex API clone.
     """
@@ -275,7 +275,7 @@ class KinovaGen3(object):
 
     def apply_pending_command(self, dt):
         """
-        Kinematic application of your commanded joint velocities directly into MuJoCo qpos/qvel.
+        Kinematic application of the commanded joint velocities directly into MuJoCo qpos/qvel.
         This bypasses robosuite's internal controller stack on purpose.
         """
         if self.sim is None:
@@ -363,25 +363,6 @@ class KinovaGen3(object):
         string = "Kinova Gen3 (Sim)\n"
         string += "  robot_name: {}\n  dof: {}".format(self.robot_name, self.dof)
         return string
-
-
-class RGBDVision(object):
-    """
-    Stub to preserve compatibility with your original imports.
-    """
-    def __init__(
-        self,
-        name: str,
-        image_topic: str = "/camera/color/image_raw",
-        depth_topic: str = "/camera/depth/image_raw",
-        image_encoding: str = "bgr8",
-        depth_encoding: str = "passthrough",
-    ):
-        self.name = name
-        self.image_encoding = image_encoding
-        self.depth_encoding = depth_encoding
-        self.frame = None
-        self.depth = None
 
 def gen_iris(base, env, state, DT):
     class IrisRecord(base):

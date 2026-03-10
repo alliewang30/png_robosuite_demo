@@ -114,6 +114,8 @@ def main():
     robot.refresh_state()
 
     i = 0
+    camera_initialized = False
+    
     while not state.snapshot()["quit_requested"]:
         robot.step()
 
@@ -121,11 +123,21 @@ def main():
         total_action[-1] = robot.gripper_target_state
         
         env.step(total_action)
-        
+
+
+        if not camera_initialized and env.viewer.viewer is not None:
+            v = env.viewer.viewer
+            v.cam.type = 0
+            v.cam.lookat[:] = [0.029, 0.067, 0.977]
+            v.cam.distance = 1.554
+            v.cam.elevation = -20.972
+            v.cam.azimuth = -23.563
+            camera_initialized = True
         robot.apply_pending_command(DT)
 
         env.sim.forward()
         env.render()
+        robot.validate_kinematics()
 
         if i % PRINT_EVERY == 0:
             print_joint_state(env, robot, label=f"loop {i}", print_on_cmd=PRINT_ONLY_ON_CMD)
@@ -133,6 +145,24 @@ def main():
         i += 1
         if SLEEP_EACH_LOOP:
             time.sleep(DT)
+
+        # code block to print camera state
+        # if i % 150 == 0:
+        #     try:
+        #         # Most robosuite renderers store the actual MJ viewer here
+        #         internal_cam = env.viewer.viewer.cam 
+                
+        #         print("\n" + "="*30)
+        #         print("FOUND CAMERA SETTINGS:")
+        #         print(f"lookat: [{internal_cam.lookat[0]:.3f}, {internal_cam.lookat[1]:.3f}, {internal_cam.lookat[2]:.3f}]")
+        #         print(f"distance: {internal_cam.distance:.3f}")
+        #         print(f"elevation: {internal_cam.elevation:.3f}")
+        #         print(f"azimuth: {internal_cam.azimuth:.3f}")
+        #         print("="*30 + "\n")
+        #     except AttributeError:
+        #         print("Could not find camera object. Checking environment directly...")
+        #         # Fallback for some versions:
+        #         print(f"Env Camera: {env.camera_name}")
 
 if __name__ == "__main__":
     main()
