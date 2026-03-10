@@ -77,5 +77,3 @@ python main_web_controller.py
 - This will automatically open a web browser to `http://127.0.0.1:5001`.
 - Use the web interface to toggle modes and control the robot.
 - The simulation will render a 3D view of the Kinova robot performing the Lift task.
-
----
