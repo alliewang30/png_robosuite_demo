@@ -6,7 +6,7 @@ This repository contains the `robosuite` implementation of the **Point and Go** 
 > The DH-parameter transformations were manually implemented by myself as part of my own learning during my Master's thesis. 
 > While modern libraries could replace these (and would definitely work better), this implementation preserves the logic 
 > used in the original research.
-> Position control has been removed for this demo. I can write the code to re-enable it upon request.
+> Position control has not been ported over for this demo. I can write the code to re-enable it upon request.
 
 **Paper:** [Point and Go: Intuitive Reference Frame Reallocation in Mode Switching for Assistive Robotics](https://arxiv.org/abs/2510.08753)
 
