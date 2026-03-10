@@ -1,8 +1,15 @@
 # Point and Go: Mode Switching for Robotic Teleoperation
 
-This repository contains the `robosuite` implementation of the **Point and Go** mode switching framework. This demo features a Kinova Gen3 robot in a "Lift" task environment, controlled via a custom Web-based joystick GUI. If you're just interested in the PnG source code, most of it is in the two files in ./control_utils. I wrote the DH-parameters transformations myself to learn during my Master's, and have not replaced it. It would certainly work better if we did, but this was the same code that was used for my Thesis, except implemented in Robosuite instead of with Kinova Kortex.
+This repository contains the `robosuite` implementation of the **Point and Go** mode switching framework. This demo features a Kinova Gen3 robot in a "Lift" task environment, controlled via a custom Web-based joystick GUI. 
+
+> **Note on Kinematics:** The core logic for Point and Go (PnG) is located in `./control_utils`. 
+> The DH-parameter transformations were manually implemented by myself as part of my own learning during my Master's thesis. 
+> While modern libraries could replace these (and would definitely work better), this implementation preserves the logic 
+> used in the original research.
+> Position control has been removed for this demo. I can write the code to re-enable it upon request.
 
 **Paper:** [Point and Go: Intuitive Reference Frame Reallocation in Mode Switching for Assistive Robotics](https://arxiv.org/abs/2510.08753)
+
 **Thesis Website:** [Finding Intuitive Action Spaces for Wheelchair-Mounted Robotic Arms](https://alliewang30.github.io/png/)
 
 ---
