@@ -82,3 +82,8 @@ python main_web.py
 - This will automatically open a web browser to `http://127.0.0.1:5001`.
 - Use the web interface to toggle modes and control the robot.
 - The simulation will render a 3D view of the Kinova robot performing the Lift task.
+
+---
+
+## Known Issue: Joint Discontinuity
+**Description:** Joint 7 (and possibly the other revolute joints) do not infinitely rotate, and instead hits a joint limit when approaching $\pm\pi$ (180°). This issue is sim only, and does not arise when implementing PnG on a real-world Kinova robot. The joint limits defined in control_utils/ are not the cause for this issue.
