@@ -396,7 +396,9 @@ def gen_iris(base, env, state, DT):
 
             if state.consume_home():
                 self.send_joint_angles(self.home_array)
-
+                self.j6_angle = 0.0
+                self.last_j6_error = 0.0
+                
         def step(self):
             self.refresh_state()
             self.controller_update()
