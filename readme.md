@@ -86,4 +86,4 @@ python main_web.py
 ---
 
 ## Known Issue: Joint Discontinuity
-**Description:** Joint 7 (and possibly the other revolute joints) do not infinitely rotate, and instead hits a joint limit when approaching $\pm\pi$ (180°). This issue is sim only, and does not arise when implementing PnG on a real-world Kinova robot. The joint limits defined in control_utils/ are not the cause for this issue.
+**Description:** Joint 7 (and possibly the other revolute joints) does not infinitely rotate, and instead hits a joint limit when approaching $\pm\pi$ (180°). This issue is sim only, and does not arise when implementing PnG on a real-world Kinova robot. The joint limits defined in control_utils/ are not the cause for this issue.
