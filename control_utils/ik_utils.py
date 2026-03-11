@@ -170,7 +170,7 @@ class png_control(KinovaGen3):
         lat_vector = np.array([base_vels_lat[0][0], base_vels_lat[1][0], 0, base_vels_lat[2][0], lat_joint_vel_2D[0], lat_joint_vel_2D[1], 0])
         W_lat = self.v_mat_trans(n=dh_limit, jv=lat_vector)
         lat_goal = np.array([W_lat[0][3], -W_lat[1][3]])*1000
-        lat_joint_vel_2D_2 = self.jacob_ee_inv(sphere=140) @ lat_goal
+        lat_joint_vel_2D_2 = self.jacob_ee_inv(sphere=100) @ lat_goal # sphere extends ee by 100 mm, making C.O.R. more intuitive
         lat_vector = np.array([base_vels_lat[0][0], base_vels_lat[1][0], 0, base_vels_lat[2][0], lat_joint_vel_2D[0] + lat_joint_vel_2D_2[0], lat_joint_vel_2D[1] + lat_joint_vel_2D_2[1], -W_lat[0][1]])
 
         return -lat_vector/np.linalg.norm(lat_vector)
