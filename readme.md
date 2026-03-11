@@ -19,7 +19,7 @@ This repository contains the `robosuite` implementation of the **Point and Go** 
 Follow these steps to set up the environment and local dependencies.
 
 ### 1. Install Python Dependencies
-Install the required base packages via pip:
+Install the required base packages via pip (Python 3.10):
 
 ```bash
 pip install Flask==3.1.3 numpy==1.26.4 scipy==1.15.3 qpsolvers==4.9.0 quadprog==0.1.13 pynput==1.8.1 opencv-python==4.11.0.86 tqdm==4.67.3 termcolor==3.3.0 mujoco==3.5.0
@@ -47,21 +47,26 @@ pip install -e .
 cd ../..
 ```
 
+
 ### 3. Required Source Modification
-To ensure compatibility with the custom controller logic, you must **comment out** the `torque_compensation` property in the `robosuite` source code.
+If you get an `AttributeError: can't set attribute 'torque_compensation'`, you must rename the local variable in `robosuite` to avoid clashing with the read-only `@property`.
 
-Open `third_party/robosuite/robosuite/controllers/parts/controller.py` and comment out lines **303 to 311**:
+Edit `third_party/robosuite/robosuite/controllers/parts/generic/joint_vel.py`:
 
+**Line 127:**
 ```python
-# @property
-# def torque_compensation(self):
-#     """
-#     Gravity compensation for this robot arm
-#
-#     Returns:
-#         np.array: torques
-#     """
-#     return self.sim.data.qfrc_bias[self.qvel_index]
+# Change:
+self.torque_compensation = kwargs.get("use_torque_compensation", True)
+# To:
+self._use_torque_comp = kwargs.get("use_torque_compensation", True)
+```
+
+**Line 192:**
+```python
+# Change:
+if self.torque_compensation:
+# To:
+if self._use_torque_comp:
 ```
 
 ---
