@@ -71,7 +71,7 @@ Open `third_party/robosuite/robosuite/controllers/parts/controller.py` and comme
 Launch the main controller script:
 
 ```bash
-python main_web_controller.py
+python main_web.py
 ```
 
 - This will automatically open a web browser to `http://127.0.0.1:5001`.
